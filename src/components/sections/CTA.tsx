@@ -72,7 +72,7 @@ const CTA = () => {
           >
             {/* WhatsApp */}
             <a
-              href="https://wa.me/918352841945"
+              href="https://wa.me/919805871945"
               target="_blank"
               rel="noopener noreferrer"
               className="group bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 hover:scale-105"
@@ -98,14 +98,14 @@ const CTA = () => {
 
             {/* Phone */}
             <a
-              href="tel:+918352841945"
+              href="tel:+919805871945"
               className="group bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 hover:scale-105"
             >
               <div className="w-16 h-16 bg-primary-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                 <Phone className="w-8 h-8 text-white" />
               </div>
               <h3 className="font-poppins font-semibold text-white mb-2">Call Us</h3>
-              <p className="text-gray-200 text-sm">+91 8352841945</p>
+              <p className="text-gray-200 text-sm">9805871945</p>
             </a>
           </motion.div>
 

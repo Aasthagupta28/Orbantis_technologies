@@ -58,14 +58,14 @@ export default function Contact() {
     {
       icon: Phone,
       title: 'Call Us',
-      details: '+91 8352841945',
-      link: 'tel:+918352841945'
+      details: '9805871945',
+      link: 'tel:+919805871945'
     },
     {
       icon: MessageCircle,
       title: 'WhatsApp',
       details: 'Quick response via WhatsApp',
-      link: 'https://wa.me/918352841945'
+      link: 'https://wa.me/919805871945'
     },
     {
       icon: MapPin,

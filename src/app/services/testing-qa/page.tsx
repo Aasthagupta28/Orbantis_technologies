@@ -319,10 +319,10 @@ export default function TestingQA() {
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
               <Link
-                href="tel:+918352841945"
+                href="tel:+919805871945"
                 className="inline-flex items-center border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-teal-600 transition-all duration-300"
               >
-                <span>Call +91 8352841945</span>
+                <span>Call 9805871945</span>
               </Link>
             </div>
           </motion.div>

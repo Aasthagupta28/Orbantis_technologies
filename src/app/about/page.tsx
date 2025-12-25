@@ -54,8 +54,9 @@ export default function About() {
               About <span className="bg-gradient-to-r from-aqua to-primary-400 bg-clip-text text-transparent">Orbantis Technologies</span>
             </h1>
             <p className="text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed">
-              Founded by <strong>Arun Kumar</strong>, we are a team of passionate developers, designers, and innovators dedicated to 
-              transforming businesses through cutting-edge technology solutions across web development, mobile apps, AI automation, and digital marketing.
+              We are a team of passionate developers, designers, and innovators dedicated to transforming businesses 
+              through cutting-edge technology solutions. From web development and mobile apps to AI automation and 
+              digital marketing, we deliver innovative solutions that drive growth and success in the digital landscape.
             </p>
           </motion.div>
         </div>
@@ -184,88 +185,6 @@ export default function About() {
                 <div className="text-gray-200">{stat.label}</div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Founder Section */}
-      <section className="py-20 bg-gradient-to-r from-navy to-primary-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-poppins font-bold text-white mb-6">
-              Meet Our <span className="bg-gradient-to-r from-aqua to-primary-400 bg-clip-text text-transparent">Founder</span>
-            </h2>
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-              The visionary leader behind Orbantis Technologies
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center lg:text-left"
-            >
-              <div className="w-32 h-32 bg-gradient-to-r from-aqua to-primary-400 rounded-full flex items-center justify-center mx-auto lg:mx-0 mb-6">
-                <span className="text-4xl font-bold text-white">AK</span>
-              </div>
-              <h3 className="text-3xl font-poppins font-bold text-white mb-4">Arun Kumar</h3>
-              <p className="text-xl text-aqua mb-6">Founder & CEO</p>
-              <p className="text-gray-200 text-lg leading-relaxed mb-6">
-                A passionate technologist with over 5+ years of experience in full-stack development, 
-                AI automation, and digital transformation. Arun founded Orbantis Technologies with a 
-                vision to democratize technology and help businesses scale through innovative solutions.
-              </p>
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4">
-                  <div className="text-2xl font-bold text-aqua mb-1">5+</div>
-                  <div className="text-gray-200 text-sm">Years Experience</div>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4">
-                  <div className="text-2xl font-bold text-aqua mb-1">50+</div>
-                  <div className="text-gray-200 text-sm">Projects Led</div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6">
-                <h4 className="text-xl font-poppins font-semibold text-white mb-3">Expertise</h4>
-                <div className="flex flex-wrap gap-2">
-                  {['React', 'Django', 'Laravel', 'WordPress', 'Shopify', 'React Native', 'Python', 'AI/ML', 'SQL', 'ETL', 'SEO', 'Figma'].map((skill) => (
-                    <span 
-                      key={skill} 
-                      className="px-3 py-1 bg-white/20 text-white text-sm rounded-full hover:bg-aqua/30 transition-colors"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6">
-                <h4 className="text-xl font-poppins font-semibold text-white mb-3">Vision</h4>
-                <p className="text-gray-200 leading-relaxed">
-                  "To create a world where technology empowers every business to achieve their dreams, 
-                  regardless of size or industry. We believe in building solutions that are not just 
-                  functional, but transformative."
-                </p>
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
