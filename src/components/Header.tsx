@@ -31,6 +31,8 @@ const Header = () => {
         { name: 'UI/UX & Digital Marketing', href: '/services/ui-ux-marketing' },
         { name: 'Backend Development', href: '/services/backend-development' },
         { name: 'Testing & QA', href: '/services/testing-qa' },
+        { name: 'Graphic Design', href: '/services/graphic-design' },
+        { name: 'SEO', href: '/services/seo' },
       ]
     },
     { name: 'About', href: '/about' },

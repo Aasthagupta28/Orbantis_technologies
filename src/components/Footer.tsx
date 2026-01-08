@@ -17,14 +17,19 @@ const Footer = () => {
       { name: 'Contact', href: '/contact' },
     ],
     services: [
-      { name: 'Web Development', href: '/services#web-development' },
-      { name: 'Mobile Development', href: '/services#mobile-development' },
-      { name: 'AI & Automation', href: '/services#ai-automation' },
-      { name: 'UI/UX Design', href: '/services#ui-ux' },
+      { name: 'Web Development', href: '/services/web-development' },
+      { name: 'Mobile Development', href: '/services/mobile-development' },
+      { name: 'AI & Machine Learning', href: '/services/ai-machine-learning' },
+      { name: 'Data & Analytics', href: '/services/data-analytics' },
+      { name: 'UI/UX & Digital Marketing', href: '/services/ui-ux-marketing' },
+      { name: 'Backend Development', href: '/services/backend-development' },
+      { name: 'Testing & QA', href: '/services/testing-qa' },
+      { name: 'Graphic Design', href: '/services/graphic-design' },
+      { name: 'SEO', href: '/services/seo' },
     ],
     resources: [
       { name: 'Blog', href: '/blog' },
-      { name: 'Case Studies', href: '/portfolio' },
+      { name: 'Case Study', href: '/case-study' },
       { name: 'Privacy Policy', href: '/privacy' },
       { name: 'Terms of Service', href: '/terms' },
     ],
@@ -86,12 +91,18 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-600 hover:text-accent-blue transition-colors duration-300"
-                  >
-                    {link.name}
-                  </Link>
+                  {link.name === 'Portfolio' ? (
+                    <span className="text-gray-600 cursor-not-allowed">
+                      {link.name}
+                    </span>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-gray-600 hover:text-accent-blue transition-colors duration-300"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -128,12 +139,18 @@ const Footer = () => {
             <ul className="space-y-3 mb-6">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-600 hover:text-accent-blue transition-colors duration-300"
-                  >
-                    {link.name}
-                  </Link>
+                  {link.name === 'Blog' ? (
+                    <span className="text-gray-600 cursor-not-allowed">
+                      {link.name}
+                    </span>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-gray-600 hover:text-accent-blue transition-colors duration-300"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -166,7 +183,10 @@ const Footer = () => {
             <p className="text-gray-600 text-sm">
               © {currentYear} Orbantis Technologies. All rights reserved.
             </p>
-            <div className="flex space-x-6">
+            <div className="flex flex-wrap gap-4 justify-center md:justify-end">
+              <Link href="/case-study" className="text-gray-600 hover:text-accent-blue text-sm transition-colors">
+                Case Study
+              </Link>
               <Link href="/privacy" className="text-gray-600 hover:text-accent-blue text-sm transition-colors">
                 Privacy Policy
               </Link>

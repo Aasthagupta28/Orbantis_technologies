@@ -41,7 +41,7 @@ export default function About() {
   ]
 
   const stats = [
-    { number: '10+', label: 'Projects Completed', icon: Users },
+    { number: '50+', label: 'Projects Completed', icon: Users },
     { number: '100%', label: 'Dedication', icon: Award },
     { number: '5+', label: 'Years Experience', icon: Clock },
     { number: '∞', label: 'Potential', icon: Globe }

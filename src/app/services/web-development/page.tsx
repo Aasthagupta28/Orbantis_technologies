@@ -68,7 +68,7 @@ export default function WebDevelopment() {
   ]
 
   const stats = [
-    { number: '10+', label: 'Projects Completed', icon: Code },
+    { number: '50+', label: 'Projects Completed', icon: Code },
     { number: '98%', label: 'Client Satisfaction', icon: Star },
     { number: '24/7', label: 'Support Available', icon: Clock },
     { number: '100%', label: 'On-Time Delivery', icon: Shield }
