@@ -9,7 +9,7 @@ function TestimonialCard({ review, index }: { review: { name: string; image: str
   const [imageError, setImageError] = useState(false)
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg flex flex-col w-full h-full" style={{ minHeight: '320px' }}>
+    <div className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg flex flex-col w-full h-full" style={{ minHeight: '280px' }}>
       {/* Client Image with Arch */}
       <div className="w-full h-40 overflow-hidden bg-gradient-to-br from-accent-blue to-accent-cyan relative flex items-center justify-center">
         {/* Arch shape at bottom */}
@@ -42,23 +42,16 @@ function TestimonialCard({ review, index }: { review: { name: string; image: str
       </div>
     
       {/* Card Content */}
-      <div className="p-5 lg:p-6 flex-1 flex flex-col">
-        <h3 className="text-base font-semibold text-gray-900 font-poppins mb-1.5">
+      <div className="p-4 sm:p-5 lg:p-6 flex-1 flex flex-col">
+        <h3 className="text-sm sm:text-base font-semibold text-gray-900 font-poppins mb-1.5">
           {review.name}
         </h3>
         <div className="flex items-center space-x-1 mb-2">
           {[...Array(review.rating)].map((_, i) => (
-            <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+            <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
           ))}
         </div>
-        <p 
-          className="text-gray-700 leading-relaxed font-poppins flex-1 text-sm"
-          style={{
-            fontSize: '14px',
-            lineHeight: '1.5',
-            fontWeight: 400,
-          }}
-        >
+        <p className="text-gray-700 leading-relaxed font-poppins flex-1 text-xs sm:text-sm">
           "{review.review}"
         </p>
       </div>
@@ -69,16 +62,25 @@ function TestimonialCard({ review, index }: { review: { name: string; image: str
 // Testimonial Carousel Component
 function TestimonialCarousel({ reviews }: { reviews: { name: string; image: string; review: string; rating: number }[] }) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [cardsPerView, setCardsPerView] = useState(2)
+  const [cardsPerView, setCardsPerView] = useState(1) // Start with 1 for mobile
 
   useEffect(() => {
     const updateCardsPerView = () => {
-      setCardsPerView(window.innerWidth >= 1024 ? 2 : 1)
+      if (window.innerWidth >= 1024) {
+        setCardsPerView(2)
+      } else {
+        setCardsPerView(1)
+      }
     }
     updateCardsPerView()
     window.addEventListener('resize', updateCardsPerView)
     return () => window.removeEventListener('resize', updateCardsPerView)
   }, [])
+
+  // Reset currentIndex when cardsPerView changes
+  useEffect(() => {
+    setCurrentIndex(0)
+  }, [cardsPerView])
 
   // Auto-slide functionality
   useEffect(() => {
@@ -107,30 +109,29 @@ function TestimonialCarousel({ reviews }: { reviews: { name: string; image: stri
   }
 
   return (
-    <div className="relative">
+    <div className="relative w-full px-2 sm:px-0">
       {/* Carousel Container */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden rounded-xl sm:rounded-2xl">
         <motion.div
           className="flex transition-transform duration-700 ease-in-out"
           animate={{ x: `-${currentIndex * 100}%` }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
         >
           {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-            <div key={slideIndex} className="flex-shrink-0 w-full flex gap-6 lg:gap-8">
+            <div key={slideIndex} className="flex-shrink-0 w-full flex" style={{ gap: cardsPerView === 2 ? '1rem' : '0' }}>
               {reviews
                 .slice(slideIndex * cardsPerView, slideIndex * cardsPerView + cardsPerView)
                 .map((review, cardIndex) => (
                   <motion.div
-                    key={review.name}
+                    key={`${review.name}-${slideIndex}-${cardIndex}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: cardIndex * 0.1 }}
-                    className="flex-1 min-w-0"
+                    className="flex-shrink-0"
                     style={{ 
-                      minWidth: '280px', 
-                      height: '100%', 
-                      maxWidth: cardsPerView === 2 ? 'calc(50% - 24px)' : '100%',
-                      flexBasis: cardsPerView === 2 ? 'calc(50% - 24px)' : '100%'
+                      width: cardsPerView === 2 ? 'calc((100% - 1rem) / 2)' : '100%',
+                      minWidth: cardsPerView === 2 ? 'calc((100% - 1rem) / 2)' : '100%',
+                      maxWidth: cardsPerView === 2 ? 'calc((100% - 1rem) / 2)' : '100%',
                     }}
                   >
                     <TestimonialCard review={review} index={slideIndex * cardsPerView + cardIndex} />
@@ -233,8 +234,8 @@ const ClientReviews = () => {
         </div>
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 items-start">
           {/* Left Side - Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -243,16 +244,16 @@ const ClientReviews = () => {
             viewport={{ once: true }}
             className="relative z-30 lg:col-span-2"
           >
-            <div className="mb-8">
-              <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6">
-                <Quote className="w-10 h-10 text-white" />
+            <div className="mb-6 sm:mb-8">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+                <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
               </div>
-              <h2 className="heading-title text-white mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-poppins font-bold text-white mb-4 sm:mb-6">
                 <span className="text-black">What Our </span>
                 <span className="text-accent-blue">Customers Say</span>
               </h2>
               <div className="rounded-lg p-3">
-                <p className="text-white text-base lg:text-lg leading-relaxed font-poppins">
+                <p className="text-white text-sm sm:text-base lg:text-lg leading-relaxed font-poppins">
                   Our clients' success stories reflect our commitment to excellence and innovation. We take pride in building lasting partnerships that drive real results.
                 </p>
               </div>
@@ -260,7 +261,7 @@ const ClientReviews = () => {
           </motion.div>
 
           {/* Right Side - Testimonial Carousel */}
-          <div className="relative z-30 lg:col-span-3">
+          <div className="relative z-30 lg:col-span-3 w-full mt-6 lg:mt-0">
             <TestimonialCarousel reviews={clientReviews} />
           </div>
         </div>

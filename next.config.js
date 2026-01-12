@@ -1,20 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-
+  output: 'export',  // ← static export enable kar raha hai
   images: {
-    domains: [
-      'images.unsplash.com',
-      'via.placeholder.com',
-    ],
+    domains: ['images.unsplash.com', 'via.placeholder.com'],
   },
-
   webpack: (config, { isServer }) => {
-    // Ensure client-side build doesn't break on server-only modules
     if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-      }
+      config.resolve.fallback = { ...config.resolve.fallback }
     }
     return config
   },

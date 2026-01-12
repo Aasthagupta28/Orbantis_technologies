@@ -114,20 +114,10 @@ const ServicesPreview = () => {
             viewport={{ once: false }}
             className="text-center px-2 sm:px-6 lg:px-8 py-10"
           >
-            <h2 className="heading-title text-gray-900 mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold text-gray-900 mb-4 sm:mb-6">
               Our Services
             </h2>
-            <p 
-              className="max-w-3xl mx-auto text-center"
-              style={{
-                fontSize: '18px',
-                lineHeight: '1.44',
-                fontWeight: 400,
-                marginTop: '12px',
-                color: '#555',
-                fontFamily: 'Poppins, sans-serif'
-              }}
-            >
+            <p className="max-w-3xl mx-auto text-center text-base sm:text-lg text-gray-700 font-poppins px-4">
               Transform Your Business
             </p>
           </motion.div>
@@ -143,7 +133,7 @@ const ServicesPreview = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: false }}
-                      className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-xl p-5 hover:shadow-lg transition-all duration-300 group"
+                      className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-xl p-4 sm:p-5 hover:shadow-lg transition-all duration-300 group"
                     >
                       {/* Icon */}
                       <div className="mb-4 flex justify-center">
@@ -173,23 +163,12 @@ const ServicesPreview = () => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-lg font-bold text-gray-900 mb-3 text-center">
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 sm:mb-3 text-center">
                         {service.title}
                       </h3>
 
                       {/* Description */}
-                      <p 
-                        className="mb-6"
-                        style={{
-                          textAlign: 'left',
-                          fontSize: '16px',
-                          lineHeight: '1.44',
-                          fontWeight: 400,
-                          marginTop: '12px',
-                          color: '#555',
-                          fontFamily: 'Poppins, sans-serif'
-                        }}
-                      >
+                      <p className="mb-4 sm:mb-6 text-sm sm:text-base text-left leading-relaxed text-gray-700 font-poppins">
                         {service.description}
                       </p>
 

@@ -65,17 +65,7 @@ const TypingTextCard = () => {
       className="w-full"
     >
       {/* Description with attractive styling - Fixed part + typing part */}
-      <p 
-        style={{
-          textAlign: 'left',
-          fontSize: '18px',
-          lineHeight: '1.44',
-          fontWeight: 400,
-          marginTop: '12px',
-          color: '#555',
-          fontFamily: 'Poppins, sans-serif'
-        }}
-      >
+      <p className="text-sm sm:text-base md:text-lg text-left leading-relaxed mt-3 text-gray-700 font-poppins">
         <span className="text-accent-blue font-bold">{fixedText}</span>
         <span className="text-gray-700">
           {displayedText}
@@ -169,7 +159,7 @@ const Hero = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-[100vh] sm:min-h-screen flex items-center overflow-hidden"
     >
       {/* Image Background with subtle floating effect */}
       <motion.div 
@@ -202,20 +192,20 @@ const Hero = () => {
       
       {/* Content - Two Column Layout */}
       <motion.div 
-        className="relative z-10 w-full h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
+        className="relative z-10 w-full min-h-[100vh] sm:min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-0"
         style={{ opacity }}
       >
         <div className="max-w-7xl w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             {/* Left Side - Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
               {/* Heading with typing Business - Clean rewrite */}
-              <h1 className="heading-title leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins font-bold leading-tight">
                 <motion.span 
                   className="block mb-2 text-gray-900"
                   initial={{ opacity: 0, x: -50 }}
@@ -253,7 +243,7 @@ const Hero = () => {
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8"
+                className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6 pt-4 sm:pt-6 lg:pt-8"
               >
                 {stats.map((stat, index) => (
                   <div
@@ -262,9 +252,9 @@ const Hero = () => {
                   >
                     <CountUp 
                       end={stat.number} 
-                      className="text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-blue mb-1 block" 
+                      className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-accent-blue mb-1 block" 
                     />
-                    <div className="text-gray-700 text-sm sm:text-base font-medium">
+                    <div className="text-gray-700 text-[10px] sm:text-xs md:text-sm lg:text-base font-medium leading-tight">
                       {stat.label}
                     </div>
                   </div>
@@ -277,12 +267,12 @@ const Hero = () => {
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-              className="flex items-center justify-center"
+              className="flex items-center justify-center mt-8 lg:mt-0"
             >
               <motion.img
                 src="/banner-image-04.png"
                 alt="Banner Illustration"
-                className="w-full h-auto max-w-md lg:max-w-lg object-contain"
+                className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg object-contain"
                 animate={{ 
                   y: [0, -20, 0],
                 }}

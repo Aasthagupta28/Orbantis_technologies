@@ -42,8 +42,8 @@ const Footer = () => {
 
   return (
     <footer ref={footerRef} className="relative bg-light-200 text-gray-900 border-t border-gray-300 z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {/* Company Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -55,10 +55,10 @@ const Footer = () => {
               <img
                 src="/logo2.png"
                 alt="Orbantis Logo"
-                className="h-[5.7rem] object-contain rounded-lg"
+                className="h-12 sm:h-16 md:h-20 lg:h-[5.7rem] object-contain rounded-lg"
               />
             </div>
-            <p className="text-gray-600 mb-6 mt-6 leading-relaxed">
+            <p className="text-gray-600 mb-4 sm:mb-6 mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed">
               Leading the digital transformation with cutting-edge technology solutions. 
               We build the future, one innovation at a time.
             </p>
@@ -86,7 +86,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h3 className="font-poppins font-semibold text-lg mb-4 text-gray-900">Company</h3>
+            <h3 className="font-poppins font-semibold text-base sm:text-lg mb-3 sm:mb-4 text-gray-900">Company</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -113,7 +113,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="font-poppins font-semibold text-lg mb-4 text-gray-900">Services</h3>
+            <h3 className="font-poppins font-semibold text-base sm:text-lg mb-3 sm:mb-4 text-gray-900">Services</h3>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
@@ -134,7 +134,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h3 className="font-poppins font-semibold text-lg mb-4 text-gray-900">Resources</h3>
+            <h3 className="font-poppins font-semibold text-base sm:text-lg mb-3 sm:mb-4 text-gray-900">Resources</h3>
             <ul className="space-y-3 mb-6">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
@@ -154,7 +154,7 @@ const Footer = () => {
               ))}
             </ul>
             
-            <h4 className="font-poppins font-semibold text-base mb-4 text-gray-900">Follow Us</h4>
+            <h4 className="font-poppins font-semibold text-sm sm:text-base mb-3 sm:mb-4 text-gray-900">Follow Us</h4>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
                 <a

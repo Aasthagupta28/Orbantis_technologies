@@ -51,14 +51,14 @@ const Header = () => {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 lg:h-20">
+        <div className="flex justify-between items-center h-14 sm:h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="flex items-center justify-center">
               <img
                 src="/logo2.png"
                 alt="Orbantis Logo"
-                className="h-[5.7rem] object-contain rounded-lg"
+                className="h-12 sm:h-16 md:h-20 lg:h-[5.7rem] object-contain rounded-lg"
               />
             </div>
           </Link>

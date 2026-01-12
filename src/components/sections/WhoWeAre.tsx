@@ -6,9 +6,9 @@ import { ArrowRight } from 'lucide-react'
 
 const WhoWeAre = () => {
   return (
-    <section className="relative py-20 lg:py-32 bg-white overflow-hidden">
+    <section className="relative py-12 sm:py-16 lg:py-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left Side - Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -22,22 +22,11 @@ const WhoWeAre = () => {
               </span>
             </div>
             
-            <h2 className="heading-title text-gray-900 mb-6">
-            Where ideas take shape and become reality
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-poppins font-bold text-gray-900 mb-4 sm:mb-6">
+              Where ideas take shape and become reality
             </h2>
             
-            <p 
-              className="mb-8"
-              style={{
-                textAlign: 'left',
-                fontSize: '18px',
-                lineHeight: '1.44',
-                fontWeight: 400,
-                marginTop: '12px',
-                color: '#555',
-                fontFamily: 'Poppins, sans-serif'
-              }}
-            >
+            <p className="mb-6 sm:mb-8 text-sm sm:text-base md:text-lg text-left leading-relaxed text-gray-700 font-poppins">
               Over the years, we drive innovation and deliver impactful solutions across the digital landscape. 
               Our unwavering commitment to excellence has established a legacy of remarkable achievements. 
               We harness technology to unlock unparalleled growth and shape a brighter future for your business. 
@@ -46,10 +35,10 @@ const WhoWeAre = () => {
             
             <Link
               href="/contact"
-              className="inline-flex items-center bg-gradient-to-r from-accent-blue to-accent-cyan text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105 group"
+              className="inline-flex items-center bg-gradient-to-r from-accent-blue to-accent-cyan text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:shadow-lg transition-all duration-300 hover:scale-105 group"
             >
               Get in touch
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-2 transition-transform" />
             </Link>
           </motion.div>
 
@@ -59,7 +48,7 @@ const WhoWeAre = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: false }}
-            className="relative h-[400px] lg:h-[500px] flex items-center justify-center"
+            className="relative h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] flex items-center justify-center mt-8 lg:mt-0"
           >
             <motion.div
               animate={{
