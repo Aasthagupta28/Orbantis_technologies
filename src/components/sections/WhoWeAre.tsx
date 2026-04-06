@@ -1,21 +1,15 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const WhoWeAre = () => {
   return (
     <section className="relative py-12 sm:py-16 lg:py-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-          {/* Left Side - Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: false }}
-          >
+          <div>
             <div className="mb-4">
               <span className="text-sm font-semibold uppercase tracking-wider text-accent-blue">
                 WHO WE ARE
@@ -40,50 +34,25 @@ const WhoWeAre = () => {
               Get in touch
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-2 transition-transform" />
             </Link>
-          </motion.div>
+          </div>
 
-          {/* Right Side - Image with Floating Animation */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: false }}
-            className="relative h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] flex items-center justify-center mt-8 lg:mt-0"
-          >
-            <motion.div
-              animate={{
-                y: [0, -20, 0],
-              }}
+          <div className="relative h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] flex items-center justify-center mt-8 lg:mt-0">
+            <motion.img
+              src="/hst-03.png"
+              alt="Who We Are"
+              className="w-full h-full object-contain"
+              animate={{ y: [0, -20, 0] }}
               transition={{
-                duration: 3,
                 repeat: Infinity,
+                repeatType: "reverse",
+                duration: 2,
                 ease: "easeInOut"
               }}
-              className="relative w-full h-full"
-            >
-              <img
-                src="/hst-03.png"
-                alt="Who We Are"
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  // Fallback if image doesn't exist
-                  e.currentTarget.style.display = 'none'
-                  const parent = e.currentTarget.parentElement
-                  if (parent) {
-                    parent.innerHTML = `
-                      <div class="w-full h-full flex items-center justify-center">
-                        <div class="w-64 h-64 bg-gradient-to-br from-accent-blue/20 via-accent-cyan/20 to-accent-blue/20 rounded-full flex items-center justify-center">
-                          <svg class="w-32 h-32 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                          </svg>
-                        </div>
-                      </div>
-                    `
-                  }
-                }}
-              />
-            </motion.div>
-          </motion.div>
+              onError={(e) => {
+                e.currentTarget.style.display = 'none'
+              }}
+            />
+          </div>
         </div>
       </div>
     </section>

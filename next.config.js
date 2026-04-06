@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',  // ← static export enable kar raha hai
+  output: 'export',
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
   images: {
+    unoptimized: true,
     domains: ['images.unsplash.com', 'via.placeholder.com'],
   },
   webpack: (config, { isServer }) => {

@@ -1,26 +1,12 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { PenTool, Lightbulb, Mouse, Image as ImageIcon } from 'lucide-react'
 import { useRef, useEffect, useState } from 'react'
 
 const SkillsSection = () => {
   const sectionRef = useRef<HTMLElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
   const [isInView, setIsInView] = useState(false)
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start']
-  })
-
-  // Parallax effect for icons - they move up slowly and smoothly when scrolling
-  // Different speeds for each icon create a dynamic effect
-  // Negative values make them move up as you scroll down
-  const icon1Y = useTransform(scrollYProgress, [0, 1], [0, -100])
-  const icon2Y = useTransform(scrollYProgress, [0, 1], [0, -130])
-  const icon3Y = useTransform(scrollYProgress, [0, 1], [0, -80])
-  const icon4Y = useTransform(scrollYProgress, [0, 1], [0, -110])
 
   const skills = [
     { name: 'Branding', percentage: 90 },
@@ -63,7 +49,7 @@ const SkillsSection = () => {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             className="lg:pr-8 order-2 lg:order-1"
           >
             <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-poppins font-bold text-gray-800 mb-6 sm:mb-8 leading-tight">
@@ -99,14 +85,10 @@ const SkillsSection = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             className="relative order-1 lg:order-2"
           >
-            {/* Main Image Card */}
-            <div 
-              ref={imageRef}
-              className="relative bg-white rounded-2xl shadow-xl overflow-visible"
-            >
+            <div className="relative bg-white rounded-2xl shadow-xl overflow-visible">
               <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[380px] xl:h-[450px] bg-gradient-to-br from-gray-100 to-gray-200 overflow-visible">
                 {/* Meeting Image - Replace with your actual image path */}
                 <img
@@ -145,33 +127,21 @@ const SkillsSection = () => {
                 </div>
                 
                 {/* Overlaid Icons with Parallax Effect - Fixed positioning to prevent clipping */}
-                <motion.div
-                  style={{ y: icon1Y }}
-                  className="absolute top-2 sm:top-4 left-2 sm:left-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-accent-blue rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-white"
-                >
+                <div className="absolute top-2 sm:top-4 left-2 sm:left-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-accent-blue rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-white">
                   <PenTool className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
-                </motion.div>
+                </div>
 
-                <motion.div
-                  style={{ y: icon2Y }}
-                  className="absolute top-2 sm:top-4 right-2 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-gray-200"
-                >
+                <div className="absolute top-2 sm:top-4 right-2 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-gray-200">
                   <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-accent-blue" />
-                </motion.div>
+                </div>
 
-                <motion.div
-                  style={{ y: icon3Y }}
-                  className="absolute bottom-12 sm:bottom-16 md:bottom-20 left-2 sm:left-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-gray-200"
-                >
+                <div className="absolute bottom-12 sm:bottom-16 md:bottom-20 left-2 sm:left-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-gray-200">
                   <Mouse className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-accent-blue" />
-                </motion.div>
+                </div>
 
-                <motion.div
-                  style={{ y: icon4Y }}
-                  className="absolute bottom-2 sm:bottom-4 right-3 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-accent-blue rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-white"
-                >
+                <div className="absolute bottom-2 sm:bottom-4 right-3 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-accent-blue rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-white">
                   <ImageIcon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
-                </motion.div>
+                </div>
               </div>
               
               {/* Dots Pattern - Inside image at bottom right corner */}

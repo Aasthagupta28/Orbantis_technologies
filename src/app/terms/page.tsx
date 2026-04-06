@@ -169,7 +169,7 @@ export default function TermsOfService() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-5xl lg:text-7xl font-poppins font-extrabold text-gray-900 mb-6 leading-tight"
+              className="text-5xl lg:text-7xl font-poppins font-bold text-gray-900 mb-6 leading-tight"
             >
               Terms of{' '}
               <span className="relative inline-block">

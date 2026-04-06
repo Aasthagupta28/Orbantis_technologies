@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,13 +26,20 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: #111827; /* Dark gray for better visibility on white background */
   background: #ffffff;
   min-height: 100vh;
+}
+
+/* Ensure text is always visible - override white text on white backgrounds */
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #f9fafb; /* Light text for dark backgrounds */
+    background: #111827;
+  }
 }
 
 a {
@@ -187,6 +193,20 @@ select {
   animation: slideInFromBottom 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
+@keyframes heroBannerFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-hero-banner-float {
+  animation: heroBannerFloat 4s ease-in-out infinite;
+}
+
 /* Textured background patterns */
 .textured-light {
   background-image: 
@@ -200,15 +220,19 @@ select {
   background-size: 40px 40px;
 }
 
-/* Global Heading Styles */
+/* Global Heading Styles - Ensure visibility */
 .heading {
   font-size: 32px;
   line-height: 1.25;
   font-weight: 600;
   position: relative;
   z-index: 0;
-  color: #111;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-poppins), system-ui, sans-serif;
+}
+
+/* Only force dark color if not on dark background and not explicitly white */
+.heading:not([class*="text-white"]):not([style*="color"]):not([class*="bg-gradient"]):not([class*="bg-dark"]):not([class*="bg-navy"]):not([class*="bg-blue"]) {
+  color: #111827 !important;
 }
 
 .heading-title {
@@ -217,16 +241,36 @@ select {
   font-weight: 600;
   position: relative;
   z-index: 0;
-  color: #111;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-poppins), system-ui, sans-serif;
 }
 
-/* Apply to all h1, h2, h3 by default */
+/* Only force dark color if not on dark background and not explicitly white */
+.heading-title:not([class*="text-white"]):not([style*="color"]):not([class*="bg-gradient"]):not([class*="bg-dark"]):not([class*="bg-navy"]):not([class*="bg-blue"]) {
+  color: #111827 !important;
+}
+
+/* Apply to all h1, h2, h3 by default - Ensure visibility */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', sans-serif;
-  color: #111;
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  color: #111827 !important; /* Force dark color for visibility */
   line-height: 1.25;
   font-weight: 600;
   position: relative;
   z-index: 0;
+}
+
+
+/* Ensure paragraphs and text have proper contrast */
+p, span, div, li, td, th {
+  color: inherit; /* Inherit from parent, but ensure contrast */
+}
+
+/* Fix white text on white/light backgrounds - Simple rule */
+[class*="bg-white"] .text-white:not([class*="bg-gradient"]):not([class*="bg-accent"]):not([class*="bg-blue"]):not([class*="bg-navy"]),
+[class*="bg-light"] .text-white:not([class*="bg-gradient"]):not([class*="bg-accent"]):not([class*="bg-blue"]):not([class*="bg-navy"]),
+.bg-white .text-white:not([class*="bg-gradient"]):not([class*="bg-accent"]):not([class*="bg-blue"]):not([class*="bg-navy"]),
+.bg-light-100 .text-white:not([class*="bg-gradient"]):not([class*="bg-accent"]):not([class*="bg-blue"]):not([class*="bg-navy"]),
+.bg-light-200 .text-white:not([class*="bg-gradient"]):not([class*="bg-accent"]):not([class*="bg-blue"]):not([class*="bg-navy"]),
+.bg-light-300 .text-white:not([class*="bg-gradient"]):not([class*="bg-accent"]):not([class*="bg-blue"]):not([class*="bg-navy"]) {
+  color: #111827 !important; /* Force dark text on white/light backgrounds */
 }

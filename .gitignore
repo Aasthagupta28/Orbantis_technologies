@@ -9,6 +9,8 @@
 
 # misc
 .DS_Store
+# Never commit archives (huge uploads / GitHub limits)
+*.zip
 .env
 # .env.local - Removed to allow pushing to Git
 .env.development.local

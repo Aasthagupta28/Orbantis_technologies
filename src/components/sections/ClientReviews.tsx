@@ -2,21 +2,18 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
-// Testimonial Card Component
 function TestimonialCard({ review, index }: { review: { name: string; image: string; review: string; rating: number }; index: number }) {
   const [imageError, setImageError] = useState(false)
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg flex flex-col w-full h-full" style={{ minHeight: '260px' }}>
-      {/* Client Image with Arch */}
-      <div className="w-full h-32 sm:h-36 md:h-40 overflow-hidden bg-gradient-to-br from-accent-blue to-accent-cyan relative flex items-center justify-center">
-        {/* Arch shape at bottom */}
+    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg flex flex-col w-full h-full" style={{ minHeight: '320px' }}>
+      <div className="w-full h-40 overflow-hidden bg-gradient-to-br from-accent-blue to-accent-cyan relative flex items-center justify-center">
         <div 
           className="absolute bottom-0 left-0 right-0 bg-white z-10"
           style={{ 
-            height: '20px',
+            height: '24px',
             clipPath: 'ellipse(100% 200% at 50% 0%)',
             transform: 'translateY(50%)'
           }}
@@ -28,30 +25,35 @@ function TestimonialCard({ review, index }: { review: { name: string; image: str
             className="w-full h-full object-contain object-center"
             style={{ objectPosition: 'center center' }}
             onError={() => {
-              console.error(`❌ Client image not found: ${review.image}`)
               setImageError(true)
             }}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-accent-blue to-accent-cyan">
-            <span className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">
+            <span className="text-white font-bold text-4xl">
               {review.name.charAt(0)}
             </span>
           </div>
         )}
       </div>
     
-      {/* Card Content */}
-      <div className="p-3 sm:p-4 md:p-5 lg:p-6 flex-1 flex flex-col">
-        <h3 className="text-xs sm:text-sm md:text-base font-semibold text-gray-900 font-poppins mb-1 sm:mb-1.5">
+      <div className="p-5 lg:p-6 flex-1 flex flex-col">
+        <h3 className="text-base font-semibold text-gray-900 font-poppins mb-1.5">
           {review.name}
         </h3>
-        <div className="flex items-center space-x-0.5 sm:space-x-1 mb-1.5 sm:mb-2">
+        <div className="flex items-center space-x-1 mb-2">
           {[...Array(review.rating)].map((_, i) => (
-            <Star key={i} className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 text-yellow-400 fill-current" />
+            <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
           ))}
         </div>
-        <p className="text-gray-700 leading-relaxed font-poppins flex-1 text-[11px] sm:text-xs md:text-sm">
+        <p 
+          className="text-gray-700 leading-relaxed font-poppins flex-1 text-sm"
+          style={{
+            fontSize: '14px',
+            lineHeight: '1.5',
+            fontWeight: 400,
+          }}
+        >
           "{review.review}"
         </p>
       </div>
@@ -59,28 +61,19 @@ function TestimonialCard({ review, index }: { review: { name: string; image: str
   )
 }
 
-// Testimonial Carousel Component
+// Testimonial Carousel Component - Using About page design
 function TestimonialCarousel({ reviews }: { reviews: { name: string; image: string; review: string; rating: number }[] }) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [cardsPerView, setCardsPerView] = useState(1) // Start with 1 for mobile
+  const [cardsPerView, setCardsPerView] = useState(2)
 
   useEffect(() => {
     const updateCardsPerView = () => {
-      if (window.innerWidth >= 1024) {
-        setCardsPerView(2)
-      } else {
-        setCardsPerView(1)
-      }
+      setCardsPerView(window.innerWidth >= 1024 ? 2 : 1)
     }
     updateCardsPerView()
     window.addEventListener('resize', updateCardsPerView)
     return () => window.removeEventListener('resize', updateCardsPerView)
   }, [])
-
-  // Reset currentIndex when cardsPerView changes
-  useEffect(() => {
-    setCurrentIndex(0)
-  }, [cardsPerView])
 
   // Auto-slide functionality
   useEffect(() => {
@@ -109,29 +102,30 @@ function TestimonialCarousel({ reviews }: { reviews: { name: string; image: stri
   }
 
   return (
-    <div className="relative w-full px-2 sm:px-0">
+    <div className="relative">
       {/* Carousel Container */}
-      <div className="relative overflow-hidden rounded-xl sm:rounded-2xl">
+      <div className="relative overflow-hidden">
         <motion.div
           className="flex transition-transform duration-700 ease-in-out"
           animate={{ x: `-${currentIndex * 100}%` }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
         >
           {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-            <div key={slideIndex} className="flex-shrink-0 w-full flex" style={{ gap: cardsPerView === 2 ? '1rem' : '0' }}>
+            <div key={slideIndex} className="flex-shrink-0 w-full flex gap-6 lg:gap-8">
               {reviews
                 .slice(slideIndex * cardsPerView, slideIndex * cardsPerView + cardsPerView)
                 .map((review, cardIndex) => (
                   <motion.div
-                    key={`${review.name}-${slideIndex}-${cardIndex}`}
+                    key={review.name}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: cardIndex * 0.1 }}
-                    className="flex-shrink-0"
+                    className="flex-1 min-w-0"
                     style={{ 
-                      width: cardsPerView === 2 ? 'calc((100% - 1rem) / 2)' : '100%',
-                      minWidth: cardsPerView === 2 ? 'calc((100% - 1rem) / 2)' : '100%',
-                      maxWidth: cardsPerView === 2 ? 'calc((100% - 1rem) / 2)' : '100%',
+                      minWidth: '280px', 
+                      height: '100%', 
+                      maxWidth: cardsPerView === 2 ? 'calc(50% - 24px)' : '100%',
+                      flexBasis: cardsPerView === 2 ? 'calc(50% - 24px)' : '100%'
                     }}
                   >
                     <TestimonialCard review={review} index={slideIndex * cardsPerView + cardIndex} />
@@ -144,24 +138,24 @@ function TestimonialCarousel({ reviews }: { reviews: { name: string; image: stri
 
       {/* Navigation Arrows */}
       {reviews.length > cardsPerView && totalSlides > 1 && (
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mt-6 sm:mt-8">
+        <div className="flex items-center justify-center gap-3 mt-8">
           <motion.button
             onClick={goToPrevious}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="w-10 h-10 sm:w-12 sm:h-12 bg-accent-blue hover:bg-accent-blue-bright rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="w-12 h-12 bg-accent-blue hover:bg-accent-blue-bright rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl"
             aria-label="Previous testimonials"
           >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ChevronLeft className="w-6 h-6" />
           </motion.button>
           <motion.button
             onClick={goToNext}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="w-10 h-10 sm:w-12 sm:h-12 bg-accent-blue hover:bg-accent-blue-bright rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="w-12 h-12 bg-accent-blue hover:bg-accent-blue-bright rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl"
             aria-label="Next testimonials"
           >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ChevronRight className="w-6 h-6" />
           </motion.button>
         </div>
       )}
@@ -190,6 +184,65 @@ function TestimonialCarousel({ reviews }: { reviews: { name: string; image: stri
 }
 
 const ClientReviews = () => {
+  const [displayedText, setDisplayedText] = useState('')
+  const [showCursor, setShowCursor] = useState(true)
+  const typingRef = useRef<{ currentIndex: number; timeoutId: NodeJS.Timeout | null; isActive: boolean }>({
+    currentIndex: 0,
+    timeoutId: null,
+    isActive: false
+  })
+
+  const typingText = "Customers"
+  
+  // Typing cursor effect
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev)
+    }, 530)
+    return () => clearInterval(cursorInterval)
+  }, [])
+
+  // Typing animation for "Customers"
+  useEffect(() => {
+    // Clear any existing timeout
+    if (typingRef.current.timeoutId) {
+      clearTimeout(typingRef.current.timeoutId)
+    }
+    
+    // Reset state
+    typingRef.current.currentIndex = 0
+    typingRef.current.isActive = true
+    setDisplayedText('')
+    
+    const typeNext = () => {
+      if (!typingRef.current.isActive) return
+      
+      if (typingRef.current.currentIndex < typingText.length) {
+        setDisplayedText(typingText.slice(0, typingRef.current.currentIndex + 1))
+        typingRef.current.currentIndex++
+        typingRef.current.timeoutId = setTimeout(typeNext, 150)
+      } else {
+        // Wait a bit, then restart
+        typingRef.current.timeoutId = setTimeout(() => {
+          if (typingRef.current.isActive) {
+            typingRef.current.currentIndex = 0
+            setDisplayedText('')
+            typeNext()
+          }
+        }, 2000)
+      }
+    }
+    
+    typeNext()
+
+    return () => {
+      typingRef.current.isActive = false
+      if (typingRef.current.timeoutId) {
+        clearTimeout(typingRef.current.timeoutId)
+      }
+    }
+  }, [typingText])
+
   const clientReviews = [
     {
       name: 'Steven Guevara',
@@ -234,34 +287,34 @@ const ClientReviews = () => {
         </div>
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8 items-start">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
           {/* Left Side - Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="relative z-30 lg:col-span-2"
-          >
-            <div className="mb-4 sm:mb-6 md:mb-8">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white/20 rounded-full flex items-center justify-center mb-3 sm:mb-4 md:mb-6">
-                <Quote className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white" />
+          <div className="relative z-30 lg:col-span-2">
+            <div className="mb-8">
+              <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6">
+                <Quote className="w-10 h-10 text-white" />
               </div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-poppins font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-poppins font-bold mb-6 leading-tight">
                 <span className="text-black">What Our </span>
-                <span className="text-accent-blue">Customers Say</span>
+                <span className="text-accent-blue">
+                  {displayedText}
+                  {showCursor && displayedText.length < typingText.length && (
+                    <span className="animate-pulse ml-1 text-accent-blue">|</span>
+                  )}
+                </span>
+                <span className="text-black"> Say</span>
               </h2>
-              <div className="rounded-lg p-2 sm:p-3">
-                <p className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed font-poppins">
+              <div className="rounded-lg p-3">
+                <p className="text-white text-base lg:text-lg leading-relaxed font-poppins">
                   Our clients' success stories reflect our commitment to excellence and innovation. We take pride in building lasting partnerships that drive real results.
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Side - Testimonial Carousel */}
-          <div className="relative z-30 lg:col-span-3 w-full mt-4 sm:mt-6 lg:mt-0">
+          <div className="relative z-30 lg:col-span-3">
             <TestimonialCarousel reviews={clientReviews} />
           </div>
         </div>

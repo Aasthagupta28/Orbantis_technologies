@@ -1,21 +1,11 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Code, Smartphone, Brain, Palette, Database, Shield, ArrowRight, Sparkles, CheckCircle, Clock, Globe, Server, Image, Search } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { Code, Smartphone, Brain, Palette, Database, Shield, ArrowRight, CheckCircle, Clock, Globe, Server, Image, Search } from 'lucide-react'
 import CountUp from '@/components/CountUp'
 
 const ServicesPreview = () => {
-  const sectionRef = useRef<HTMLElement>(null)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start']
-  })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
-  const y = useTransform(scrollYProgress, [0, 0.5], [50, 0])
 
   const services = [
     {
@@ -85,56 +75,36 @@ const ServicesPreview = () => {
 
   return (
     <>
-      {/* Our Services Section */}
-      <section 
-        ref={sectionRef}
-        className="relative min-h-screen flex flex-col bg-light-200 overflow-hidden"
-      >
-        {/* Image Background */}
+      <section className="relative min-h-screen flex flex-col bg-light-200 overflow-hidden">
         <div className="absolute inset-0 w-full h-full z-0">
           <img
             src="/simple-blue-white-background-with-text-space.jpg"
             alt="Background"
             className="w-full h-full object-cover"
             onError={(e) => {
-              console.error('❌ Background image not found')
               e.currentTarget.style.display = 'none'
             }}
           />
         </div>
 
-        <motion.div 
-          className="relative z-10"
-        >
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: false }}
-            className="text-center px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-10"
-          >
+        <div className="relative z-10">
+          <div className="text-center px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-poppins font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
               Our Services
             </h2>
             <p className="max-w-3xl mx-auto text-center text-sm sm:text-base md:text-lg text-gray-700 font-poppins px-2 sm:px-4">
               Transform Your Business
             </p>
-          </motion.div>
+          </div>
 
-        {/* Services Grid - White Cards with Icons */}
-            <div className="pt-2 pb-8 sm:pb-12">
-              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-                  {services.map((service, index) => (
-                    <motion.div
-                      key={service.title}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: false }}
-                      className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-xl p-4 sm:p-5 hover:shadow-lg transition-all duration-300 group"
-                    >
+          <div className="pt-2 pb-8 sm:pb-12">
+            <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                {services.map((service) => (
+                  <div
+                    key={service.title}
+                    className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-xl p-4 sm:p-5 hover:shadow-lg transition-all duration-300 group"
+                  >
                       {/* Icon */}
                       <div className="mb-3 sm:mb-4 flex justify-center">
                         <div className={`${service.title === 'Backend Development' || service.title === 'Graphic Design' || service.title === 'SEO' ? 'w-20 h-20 sm:w-24 sm:h-24' : 'w-14 h-14 sm:w-16 sm:h-16'} flex items-center justify-center`}>
@@ -181,31 +151,30 @@ const ServicesPreview = () => {
                         Learn More
                         <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2 group-hover/link:translate-x-2 transition-transform" />
                       </Link>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-      </motion.div>
-    </section>
+          </div>
+        </div>
+      </section>
 
-      {/* Stats Section - Image Left, Stats Right */}
       <section className="relative bg-white py-12 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-            {/* Left Side - Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: false }}
-              className="flex items-center justify-center order-2 lg:order-1"
-            >
-              <img
+            <div className="flex items-center justify-center order-2 lg:order-1">
+              <motion.img
                 src="/hst-05.png"
                 alt="Stats Illustration"
                 className="w-full max-w-[280px] sm:max-w-sm md:max-w-md h-auto object-contain"
+                animate={{ y: [0, -20, 0] }}
+                transition={{
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  duration: 2,
+                  ease: "easeInOut"
+                }}
                 onError={(e) => {
                   // Fallback if image doesn't exist
                   e.currentTarget.style.display = 'none'
@@ -228,100 +197,57 @@ const ServicesPreview = () => {
                   }
                 }}
               />
-            </motion.div>
+            </div>
 
-            {/* Right Side - Stats Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: false }}
-              className="order-1 lg:order-2"
-            >
+            <div className="order-1 lg:order-2">
               <div className="mb-2">
                 <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-accent-blue">
                   INSIGHT
                 </span>
               </div>
               
-              <h2 className="heading-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+              <h2 className="heading-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-relaxed" style={{ lineHeight: '1.2' }}>
                 Unlocking<br />
                 Competitive Edge
               </h2>
               
-              <p 
-                className="mb-6 sm:mb-8 text-sm sm:text-base md:text-lg"
-                style={{
-                  textAlign: 'left',
-                  lineHeight: '1.44',
-                  fontWeight: 400,
-                  marginTop: '12px',
-                  color: '#555',
-                  fontFamily: 'Poppins, sans-serif'
-                }}
-              >
+              <p className="mb-6 sm:mb-8 text-sm sm:text-base md:text-lg text-gray-700">
                 Revealing Our Key Differentiator.
               </p>
 
-              {/* Statistics Grid - 2 Columns */}
               <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  viewport={{ once: false }}
-                >
+                <div>
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
-                    <span>10+</span>
+                    <CountUp end="10" className="inline" />
+                    <span>+</span>
                   </div>
                   <div className="text-xs sm:text-sm text-gray-700">Projects Completed</div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: false }}
-                >
+                <div>
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
                     <CountUp end="100" className="inline" />
                     <span className="text-accent-blue">%</span>
                   </div>
                   <div className="text-xs sm:text-sm text-gray-700">Dedication</div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  viewport={{ once: false }}
-                >
+                <div>
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
                     <CountUp end="24" className="inline" />/<CountUp end="7" className="inline" />
                   </div>
                   <div className="text-xs sm:text-sm text-gray-700">Support Available</div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }}
-                >
+                <div>
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
                     <span>∞</span>
                   </div>
                   <div className="text-xs sm:text-sm text-gray-700">Potential</div>
-                </motion.div>
+                </div>
               </div>
 
-              {/* CTA Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                viewport={{ once: false }}
-              >
+              <div>
                 <Link
                   href="/contact"
                   className="inline-flex items-center bg-accent-blue text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-xs sm:text-sm hover:bg-accent-blue-bright transition-all duration-300 group"
@@ -329,8 +255,8 @@ const ServicesPreview = () => {
                   Get in touch
                   <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -9,12 +9,11 @@ const LetsTalk = () => {
     <section className="relative overflow-hidden bg-gradient-to-r from-accent-blue via-accent-cyan to-accent-blue">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left Side - Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             className="flex items-center justify-center"
           >
             <motion.img
@@ -55,14 +54,14 @@ const LetsTalk = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             className="flex flex-col justify-center pl-6 lg:pl-8"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: false }}
+              viewport={{ once: true }}
               className="mb-4"
             >
               <span className="text-sm font-semibold uppercase tracking-wider text-white/90">
@@ -75,7 +74,7 @@ const LetsTalk = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: false }}
+              viewport={{ once: true }}
               className="text-5xl md:text-4xl lg:text-4xl font-bold text-white mb-6"
             >
               Let’s connect and discuss your project.
@@ -87,7 +86,7 @@ const LetsTalk = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              viewport={{ once: false }}
+              viewport={{ once: true }}
             >
               <Link
                 href="/contact"

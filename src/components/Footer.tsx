@@ -13,7 +13,6 @@ const Footer = () => {
     company: [
       { name: 'About Us', href: '/about' },
       { name: 'Our Services', href: '/services' },
-      { name: 'Portfolio', href: '/portfolio' },
       { name: 'Contact', href: '/contact' },
     ],
     services: [
@@ -90,18 +89,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  {link.name === 'Portfolio' ? (
-                    <span className="text-gray-600 cursor-not-allowed">
-                      {link.name}
-                    </span>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      className="text-gray-600 hover:text-accent-blue transition-colors duration-300"
-                    >
-                      {link.name}
-                    </Link>
-                  )}
+                  <Link
+                    href={link.href}
+                    className="text-gray-600 hover:text-accent-blue transition-colors duration-300"
+                  >
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>

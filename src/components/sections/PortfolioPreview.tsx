@@ -1,19 +1,9 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { ExternalLink, ArrowRight } from 'lucide-react'
-import { useRef } from 'react'
 
 const PortfolioPreview = () => {
-  const sectionRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start']
-  })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
-  const y = useTransform(scrollYProgress, [0, 0.5], [50, 0])
 
   const projects = [
     {
@@ -40,42 +30,23 @@ const PortfolioPreview = () => {
   ]
 
   return (
-    <section 
-      ref={sectionRef}
-      className="py-24 bg-white relative overflow-hidden"
-    >
-      <motion.div 
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-        style={{ opacity, y }}
-      >
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+    <section className="py-24 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl xl:text-6xl font-poppins font-bold text-gray-900 mb-6">
             Our <span className="bg-gradient-to-r from-accent-blue via-accent-cyan to-accent-magenta bg-clip-text text-transparent">Work</span>
           </h2>
           <p className="text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Discover our latest work and see how we've helped businesses transform their digital presence.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-          {projects.map((project, index) => (
-            <motion.div
+          {projects.map((project) => (
+            <div
               key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
               className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200"
             >
-              {/* Project Image */}
               <div className="relative h-64 overflow-hidden">
                 <img
                   src={project.image}
@@ -87,14 +58,12 @@ const PortfolioPreview = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent"></div>
                 
-                {/* Category Badge */}
                 <div className="absolute top-4 left-4">
                   <span className="px-4 py-2 bg-accent-blue/90 backdrop-blur-md text-white text-sm font-bold rounded-lg">
                     {project.category}
                   </span>
                 </div>
 
-                {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <a
                     href={project.link}
@@ -108,7 +77,6 @@ const PortfolioPreview = () => {
                 </div>
               </div>
 
-              {/* Project Content */}
               <div className="p-6">
                 <h3 className="text-xl font-poppins font-bold text-gray-900 mb-3 group-hover:text-accent-blue transition-colors">
                   {project.title}
@@ -117,27 +85,10 @@ const PortfolioPreview = () => {
                   {project.description}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
-
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center border-2 border-accent-blue text-accent-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-accent-blue hover:text-white transition-all duration-300"
-          >
-            View All Projects
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Link>
-        </motion.div>
-      </motion.div>
+      </div>
     </section>
   )
 }

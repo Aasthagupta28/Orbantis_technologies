@@ -28,31 +28,37 @@ export default function Contact() {
     setError(null)
     
     try {
-      const response = await fetch('/api/contact', {
+      // Use Formspree for static site form submission
+      const formspreeEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'xrgwqgvq'
+      
+      const response = await fetch(`https://formspree.io/f/${formspreeEndpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `Contact Form Submission from ${formData.name}`,
+          _replyto: formData.email,
+        }),
       })
 
       const data = await response.json()
 
-      console.log('Form submission response:', { status: response.status, data })
-
       if (!response.ok) {
-        console.error('API Error:', data)
         throw new Error(data.error || 'Failed to send message')
       }
-
-      console.log('Email sent successfully!')
+      
       setIsSubmitted(true)
-      setIsSubmitting(false) // Reset submitting state
+      setIsSubmitting(false)
       
       // Reset form after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false)
-        setIsSubmitting(false) // Ensure submitting state is reset
+        setIsSubmitting(false)
         setFormData({
           name: '',
           email: '',
@@ -60,7 +66,6 @@ export default function Contact() {
         })
       }, 5000)
     } catch (err) {
-      console.error('Form submission error:', err)
       const errorMessage = err instanceof Error ? err.message : 'Failed to send message. Please try again.'
       setError(errorMessage)
       setIsSubmitting(false)
