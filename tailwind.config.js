@@ -13,6 +13,8 @@ module.exports = {
         'light-200': '#f8fafc',
         'light-300': '#f1f5f9',
         'light-400': '#e2e8f0',
+        aqua: '#00bfff',
+        navy: '#0c4a6e',
         accent: {
           // Blue accents (from video)
           blue: '#0066cc',

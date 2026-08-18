@@ -35,7 +35,7 @@ const Footer = () => {
 
   const socialLinks = [
     { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/orbantis-technologies' },
-    { name: 'GitHub', icon: Github, href: 'https://github.com/orbantis-technologies' },
+    { name: 'GitHub', icon: Github, href: 'https://github.com/arunkumarbhardwaj1999' },
     { name: 'WhatsApp', icon: MessageCircle, href: 'https://wa.me/919805871945' },
   ]
 
@@ -64,7 +64,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-gray-600">
                 <Mail className="w-4 h-4 text-accent-blue" />
-                <a href="mailto:info@orbantistechnologies.com" className="text-sm hover:text-accent-blue transition-colors">info@orbantistechnologies.com</a>
+                <a href="mailto:arunkumarbhardwaj1999@gmail.com" className="text-sm hover:text-accent-blue transition-colors">arunkumarbhardwaj1999@gmail.com</a>
               </div>
               <div className="flex items-center space-x-3 text-gray-600">
                 <Phone className="w-4 h-4 text-accent-cyan" />
