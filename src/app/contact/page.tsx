@@ -131,11 +131,11 @@ export default function Contact() {
               transition={{ duration: 0.8 }}
               className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl max-w-lg mx-auto lg:mx-0 w-full"
             >
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 font-poppins">
-                Have some questions or want to say hi?
-              </h2>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 font-poppins">
+                Contact Orbantis Technologies
+              </h1>
               <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
-                Anything you ask, no matter how small, will make a big difference in helping us.
+                Have some questions or want to say hi? Anything you ask, no matter how small, will make a big difference in helping us.
               </p>
               
               {isSubmitted ? (

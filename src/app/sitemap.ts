@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { SITE_URL } from '@/lib/seo'
+import { canonicalUrl } from '@/lib/seo'
 
 export const dynamic = 'force-static'
 
@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
 
   return routes.map((path) => ({
-    url: `${SITE_URL}${path}`,
+    url: canonicalUrl(path),
     lastModified,
     changeFrequency: path === '/' ? 'weekly' : 'monthly',
     priority: path === '/' ? 1 : path === '/services' ? 0.9 : 0.8,

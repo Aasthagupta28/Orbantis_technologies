@@ -4,7 +4,8 @@ import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ConditionalLetsTalk from '@/components/ConditionalLetsTalk'
-import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from '@/lib/seo'
+import JsonLd from '@/components/JsonLd'
+import { canonicalUrl, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from '@/lib/seo'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -22,19 +23,27 @@ const inter = Inter({
   fallback: ['system-ui', 'arial'],
 })
 
-const homeTitle = `${SITE_NAME} - Digital Innovation & Technology Solutions`
+const homeTitle = 'Orbantis Technologies | Web, Mobile & AI Development'
 const homeDescription =
-  'Leading IT company specializing in web development, mobile apps, AI automation, and digital transformation. Get your free quote today!'
+  'Orbantis Technologies builds custom websites, mobile apps, AI solutions and UI/UX design for growing businesses. Get a free project quote today.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: homeTitle,
-    template: `%s | ${SITE_NAME}`,
+    template: '%s',
   },
   description: homeDescription,
-  keywords:
-    'web development, mobile development, AI automation, digital transformation, IT solutions, React, Python, Django, Orbantis',
+  keywords: [
+    'web development company',
+    'mobile app development company',
+    'AI development services',
+    'custom software development',
+    'UI UX design agency',
+    'SEO services company',
+    'Orbantis Technologies',
+    'IT services company India',
+  ],
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
@@ -44,7 +53,7 @@ export const metadata: Metadata = {
     description: homeDescription,
     type: 'website',
     locale: 'en_US',
-    url: SITE_URL,
+    url: canonicalUrl('/'),
     siteName: SITE_NAME,
     images: [{ url: DEFAULT_OG_IMAGE, alt: SITE_NAME }],
   },
@@ -55,12 +64,18 @@ export const metadata: Metadata = {
     images: [DEFAULT_OG_IMAGE],
   },
   alternates: {
-    canonical: SITE_URL,
+    canonical: canonicalUrl('/'),
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
+    },
   },
 }
 
@@ -74,9 +89,17 @@ const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: SITE_NAME,
-  url: SITE_URL,
+  url: canonicalUrl('/'),
   logo: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
+  image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
   description: homeDescription,
+  telephone: '+91-9805871945',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Ghumarwin',
+    addressRegion: 'Himachal Pradesh',
+    addressCountry: 'IN',
+  },
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '+91-9805871945',
@@ -90,8 +113,9 @@ const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: SITE_NAME,
-  url: SITE_URL,
+  url: canonicalUrl('/'),
   description: homeDescription,
+  inLanguage: 'en',
   publisher: { '@type': 'Organization', name: SITE_NAME },
 }
 
@@ -103,12 +127,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
       <body className={`${inter.className} antialiased`}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([organizationJsonLd, websiteJsonLd]),
-          }}
-        />
+        <JsonLd data={[organizationJsonLd, websiteJsonLd]} />
         <Header />
         <div className="relative">
           <main className="min-h-screen relative z-20">{children}</main>

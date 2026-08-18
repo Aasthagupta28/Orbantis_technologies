@@ -1,14 +1,30 @@
 import type { Metadata } from 'next'
-import { pageMetadata } from '@/lib/seo'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbJsonLd, pageMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = pageMetadata({
-  title: 'About Us',
+  title: 'About Orbantis Technologies | Our Team & Values',
   description:
-    'Meet Orbantis Technologies — our values, team strengths, and how we deliver web, mobile, and AI solutions for businesses worldwide.',
+    'Learn about Orbantis Technologies, the team behind our web, mobile and AI projects, the values we work by and how we help businesses grow online.',
   path: '/about',
-  keywords: 'about Orbantis, IT company, software team, digital agency',
+  keywords: [
+    'about Orbantis Technologies',
+    'software development team',
+    'digital transformation agency',
+    'IT consulting company',
+  ],
 })
 
+const jsonLd = breadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'About Us', path: '/about' },
+])
+
 export default function AboutLayout({ children }: { children: React.ReactNode }) {
-  return children
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      {children}
+    </>
+  )
 }

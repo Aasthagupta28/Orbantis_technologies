@@ -87,11 +87,11 @@ export default function Services() {
 
         <div className="relative z-10">
           <div className="text-center px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-10">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-poppins font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-poppins font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
               Our Services
-            </h2>
+            </h1>
             <p className="max-w-3xl mx-auto text-center text-sm sm:text-base md:text-lg text-gray-700 font-poppins px-2 sm:px-4">
-              Transform Your Business
+              Web development, mobile apps, AI, design, QA and SEO services to transform your business.
             </p>
           </div>
 

@@ -1,14 +1,39 @@
 import type { Metadata } from 'next'
-import { pageMetadata } from '@/lib/seo'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbJsonLd, pageMetadata, serviceJsonLd } from '@/lib/seo'
+
+const NAME = 'AI & Machine Learning'
+const PATH = '/services/ai-machine-learning'
+const DESCRIPTION =
+  'AI and machine learning development from Orbantis Technologies: workflow automation, predictive models, chatbots and intelligent product features.'
 
 export const metadata: Metadata = pageMetadata({
-  title: 'AI & Machine Learning',
-  description:
-    'AI and machine learning solutions — automation, models, and intelligent features for your business.',
-  path: '/services/ai-machine-learning',
-  keywords: 'machine learning consulting, AI automation, intelligent systems',
+  title: 'AI & Machine Learning Development Services Company',
+  description: DESCRIPTION,
+  path: PATH,
+  keywords: [
+    'AI development services',
+    'machine learning consulting',
+    'AI automation company',
+    'predictive analytics solutions',
+    'chatbot development',
+  ],
 })
 
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: NAME, path: PATH },
+  ]),
+  serviceJsonLd({ name: NAME, description: DESCRIPTION, path: PATH }),
+]
+
 export default function AIMLLayout({ children }: { children: React.ReactNode }) {
-  return children
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      {children}
+    </>
+  )
 }

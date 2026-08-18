@@ -1,14 +1,39 @@
 import type { Metadata } from 'next'
-import { pageMetadata } from '@/lib/seo'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbJsonLd, pageMetadata, serviceJsonLd } from '@/lib/seo'
+
+const NAME = 'Web Development'
+const PATH = '/services/web-development'
+const DESCRIPTION =
+  'Custom web development services from Orbantis Technologies. We build fast, secure and SEO-friendly websites and web apps with React, Next.js and Django.'
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Web Development Services',
-  description:
-    'Custom websites and web apps with modern stacks — performance, SEO, and scalable architecture by Orbantis Technologies.',
-  path: '/services/web-development',
-  keywords: 'React development, Next.js, web application development, custom website',
+  title: 'Web Development Company | Custom Websites & Apps',
+  description: DESCRIPTION,
+  path: PATH,
+  keywords: [
+    'web development company',
+    'custom website development',
+    'React development services',
+    'Next.js development agency',
+    'web application development',
+  ],
 })
 
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: NAME, path: PATH },
+  ]),
+  serviceJsonLd({ name: NAME, description: DESCRIPTION, path: PATH }),
+]
+
 export default function WebDevLayout({ children }: { children: React.ReactNode }) {
-  return children
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      {children}
+    </>
+  )
 }

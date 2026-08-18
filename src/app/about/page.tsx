@@ -102,6 +102,10 @@ export default function About() {
               transition={{ duration: 1.2, ease: "easeOut" }}
               className="space-y-6"
             >
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-poppins leading-tight">
+                <span className="text-gray-900">About </span>
+                <span className="text-accent-blue">Orbantis Technologies</span>
+              </h1>
               <p className="text-sm sm:text-base md:text-lg text-left leading-relaxed text-gray-700 font-poppins">
                 <span className="text-accent-blue font-bold">We are creators and innovators in digital transformation.</span>
                 <span className="text-gray-700"> Our goal is to help you succeed in the digital world with the latest technologies and reliable solutions. Our experienced team is committed to delivering the best. Ready to go digital? Think Orbantis.</span>
