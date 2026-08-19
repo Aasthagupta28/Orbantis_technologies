@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 const FROM_EMAIL = 'support@orbantistechnologies.com'
 const FROM_NAME = 'Orbantis Technologies'
 const TO_TEAM = 'support@orbantistechnologies.com'
-const CC = ['arun@orbantistechnologies.com', 'arunkumarbhardwaj1999@gmail.com']
+const CC = ['arun@orbantistechnologies.com']
 
 function escapeHtml(value: string) {
   return value

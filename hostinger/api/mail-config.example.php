@@ -19,6 +19,5 @@ return [
     'to_email' => 'support@orbantistechnologies.com',
     'cc' => [
         'arun@orbantistechnologies.com',
-        'arunkumarbhardwaj1999@gmail.com',
     ],
 ];

@@ -141,7 +141,6 @@ function email_layout(string $title, string $body): string
 
 $cc = [
     'arun@orbantistechnologies.com',
-    'arunkumarbhardwaj1999@gmail.com',
 ];
 $toTeam = $config['to_email'] ?? 'support@orbantistechnologies.com';
 
