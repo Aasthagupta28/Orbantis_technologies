@@ -87,13 +87,22 @@ export const viewport: Viewport = {
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': ['Organization', 'ProfessionalService', 'LocalBusiness'],
   name: SITE_NAME,
   url: canonicalUrl('/'),
   logo: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
   image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
   description: homeDescription,
   telephone: '+91-8352841945',
+  email: 'support@orbantistechnologies.com',
+  areaServed: ['IN', 'Worldwide'],
+  knowsAbout: [
+    'Web development',
+    'Mobile app development',
+    'Artificial intelligence',
+    'UI UX design',
+    'Search engine optimization',
+  ],
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Ghumarwin',
@@ -103,10 +112,14 @@ const organizationJsonLd = {
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '+91-8352841945',
+    email: 'support@orbantistechnologies.com',
     contactType: 'customer service',
     areaServed: 'Worldwide',
     availableLanguage: ['English', 'Hindi'],
   },
+  sameAs: [
+    'https://github.com/arunkumarbhardwaj1999',
+  ],
 }
 
 const websiteJsonLd = {
@@ -119,6 +132,37 @@ const websiteJsonLd = {
   publisher: { '@type': 'Organization', name: SITE_NAME },
 }
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What services does Orbantis Technologies offer?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Orbantis Technologies offers web development, mobile app development, AI and machine learning, backend development, UI/UX design, graphic design, SEO, data analytics, and software testing.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Where is Orbantis Technologies located?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Orbantis Technologies is based in Ghumarwin, Bilaspur district, Himachal Pradesh, India, and works with clients worldwide.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How can I get a quote from Orbantis Technologies?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Use the contact form at https://orbantistechnologies.com/contact/, email support@orbantistechnologies.com, or call +91 8352841945.',
+      },
+    },
+  ],
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -127,7 +171,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
       <body className={`${inter.className} antialiased`}>
-        <JsonLd data={[organizationJsonLd, websiteJsonLd]} />
+        <JsonLd data={[organizationJsonLd, websiteJsonLd, faqJsonLd]} />
         <Header />
         <div className="relative">
           <main className="min-h-screen relative z-20">{children}</main>

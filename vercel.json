@@ -1,5 +1,22 @@
 {
   "rewrites": [
     { "source": "/api/contact.php", "destination": "/api/contact" }
+  ],
+  "redirects": [
+    { "source": "/about", "destination": "/about/", "permanent": true },
+    { "source": "/contact", "destination": "/contact/", "permanent": true },
+    { "source": "/portfolio", "destination": "/portfolio/", "permanent": true },
+    { "source": "/privacy", "destination": "/privacy/", "permanent": true },
+    { "source": "/terms", "destination": "/terms/", "permanent": true },
+    { "source": "/services", "destination": "/services/", "permanent": true },
+    { "source": "/services/web-development", "destination": "/services/web-development/", "permanent": true },
+    { "source": "/services/mobile-development", "destination": "/services/mobile-development/", "permanent": true },
+    { "source": "/services/ai-machine-learning", "destination": "/services/ai-machine-learning/", "permanent": true },
+    { "source": "/services/data-analytics", "destination": "/services/data-analytics/", "permanent": true },
+    { "source": "/services/backend-development", "destination": "/services/backend-development/", "permanent": true },
+    { "source": "/services/graphic-design", "destination": "/services/graphic-design/", "permanent": true },
+    { "source": "/services/ui-ux-marketing", "destination": "/services/ui-ux-marketing/", "permanent": true },
+    { "source": "/services/seo", "destination": "/services/seo/", "permanent": true },
+    { "source": "/services/testing-qa", "destination": "/services/testing-qa/", "permanent": true }
   ]
 }

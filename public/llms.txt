@@ -1,0 +1,28 @@
+# Orbantis Technologies
+
+Orbantis Technologies is a software company in Ghumarwin, Himachal Pradesh, India.
+
+We build websites, mobile apps, AI solutions, backend systems, UI/UX, SEO, and QA for businesses worldwide.
+
+## Contact
+- Website: https://orbantistechnologies.com/
+- Email: support@orbantistechnologies.com
+- Phone: +91 8352841945
+
+## Services
+- Web development: https://orbantistechnologies.com/services/web-development/
+- Mobile app development: https://orbantistechnologies.com/services/mobile-development/
+- AI and machine learning: https://orbantistechnologies.com/services/ai-machine-learning/
+- Data analytics: https://orbantistechnologies.com/services/data-analytics/
+- Backend development: https://orbantistechnologies.com/services/backend-development/
+- UI/UX and marketing design: https://orbantistechnologies.com/services/ui-ux-marketing/
+- Graphic design: https://orbantistechnologies.com/services/graphic-design/
+- SEO: https://orbantistechnologies.com/services/seo/
+- Testing and QA: https://orbantistechnologies.com/services/testing-qa/
+
+## Pages
+- Home: https://orbantistechnologies.com/
+- About: https://orbantistechnologies.com/about/
+- Services: https://orbantistechnologies.com/services/
+- Contact: https://orbantistechnologies.com/contact/
+- Portfolio: https://orbantistechnologies.com/portfolio/

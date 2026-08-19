@@ -4,23 +4,20 @@ export const SITE_URL = 'https://orbantistechnologies.com'
 export const SITE_NAME = 'Orbantis Technologies'
 export const DEFAULT_OG_IMAGE = '/logo2.png'
 
-/** Keywords appended to every page so brand + core service terms are always present. */
 const BASE_KEYWORDS = [
   'Orbantis Technologies',
   'software development company',
   'IT services company India',
+  'Ghumarwin Himachal Pradesh',
 ]
 
 type PageMeta = {
-  /** Rendered as-is in <title>. Keep between 40 and 60 characters. */
   title: string
-  /** Rendered as-is in <meta name="description">. Keep between 140 and 160 characters. */
   description: string
   path: string
   keywords?: string[]
 }
 
-/** Static export writes `<path>/index.html`, so canonicals must carry the trailing slash. */
 export function canonicalUrl(path: string): string {
   if (path === '/') return `${SITE_URL}/`
   return `${SITE_URL}${path.replace(/\/$/, '')}/`
