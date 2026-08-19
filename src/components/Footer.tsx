@@ -36,7 +36,7 @@ const Footer = () => {
   const socialLinks = [
     { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/orbantis-technologies' },
     { name: 'GitHub', icon: Github, href: 'https://github.com/arunkumarbhardwaj1999' },
-    { name: 'WhatsApp', icon: MessageCircle, href: 'https://wa.me/919805871945' },
+    { name: 'WhatsApp', icon: MessageCircle, href: 'https://wa.me/918352841945' },
   ]
 
   return (
@@ -68,7 +68,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3 text-gray-600">
                 <Phone className="w-4 h-4 text-accent-cyan" />
-                <a href="tel:+919805871945" className="text-sm hover:text-accent-cyan transition-colors">9805871945</a>
+                <a href="tel:+918352841945" className="text-sm hover:text-accent-cyan transition-colors">8352841945</a>
               </div>
               <div className="flex items-start space-x-3 text-gray-600">
                 <MapPin className="w-4 h-4 text-accent-magenta mt-1" />

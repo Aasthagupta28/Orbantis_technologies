@@ -93,7 +93,7 @@ const organizationJsonLd = {
   logo: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
   image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
   description: homeDescription,
-  telephone: '+91-9805871945',
+  telephone: '+91-8352841945',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Ghumarwin',
@@ -102,7 +102,7 @@ const organizationJsonLd = {
   },
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+91-9805871945',
+    telephone: '+91-8352841945',
     contactType: 'customer service',
     areaServed: 'Worldwide',
     availableLanguage: ['English', 'Hindi'],

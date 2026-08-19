@@ -137,11 +137,11 @@ export default function UIUXMarketing() {
                   LET'S TALK
                 </Link>
                 <a
-                  href="tel:+919805871945"
+                  href="tel:+918352841945"
                   className="inline-flex items-center text-gray-700 hover:text-accent-blue transition-colors"
                 >
                   <Phone className="w-5 h-5 mr-2" />
-                  <span className="text-lg font-semibold">+91 9805871945</span>
+                  <span className="text-lg font-semibold">+91 8352841945</span>
                 </a>
               </div>
             </div>

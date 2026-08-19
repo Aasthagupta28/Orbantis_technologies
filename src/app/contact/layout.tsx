@@ -5,7 +5,7 @@ import { breadcrumbJsonLd, canonicalUrl, pageMetadata, SITE_NAME } from '@/lib/s
 export const metadata: Metadata = pageMetadata({
   title: 'Contact Orbantis Technologies | Get a Free Quote',
   description:
-    'Contact Orbantis Technologies for web development, mobile app and AI projects. Request a free quote, call +91 9805871945 or send us a message today.',
+    'Contact Orbantis Technologies for web development, mobile app and AI projects. Request a free quote, call +91 8352841945 or send us a message today.',
   path: '/contact',
   keywords: [
     'contact Orbantis Technologies',
@@ -23,7 +23,7 @@ const contactPageJsonLd = {
   mainEntity: {
     '@type': 'Organization',
     name: SITE_NAME,
-    telephone: '+91-9805871945',
+    telephone: '+91-8352841945',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Ghumarwin',

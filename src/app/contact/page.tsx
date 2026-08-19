@@ -8,7 +8,8 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    website: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -28,27 +29,34 @@ export default function Contact() {
     setError(null)
     
     try {
-      // Use Formspree for static site form submission
-      const formspreeEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'xrgwqgvq'
-      
-      const response = await fetch(`https://formspree.io/f/${formspreeEndpoint}`, {
+      const isLocal =
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1'
+      const endpoint = isLocal ? '/api/contact' : '/api/contact.php'
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          _subject: `Contact Form Submission from ${formData.name}`,
-          _replyto: formData.email,
+          website: formData.website,
         }),
       })
 
-      const data = await response.json()
+      const text = await response.text()
+      let data: { ok?: boolean; error?: string } = {}
+      try {
+        data = JSON.parse(text)
+      } catch {
+        throw new Error('Could not send your message. Please try again.')
+      }
 
-      if (!response.ok) {
+      if (!response.ok || !data.ok) {
         throw new Error(data.error || 'Failed to send message')
       }
       
@@ -62,7 +70,8 @@ export default function Contact() {
         setFormData({
           name: '',
           email: '',
-          message: ''
+          message: '',
+          website: '',
         })
       }, 5000)
     } catch (err) {
@@ -86,7 +95,7 @@ export default function Contact() {
       title: "Let's Talk",
       description: 'Pick up the phone to chat with a member of our team.',
       buttonText: 'Call Us',
-      link: 'tel:+919805871945',
+      link: 'tel:+918352841945',
       gradient: 'from-accent-blue to-accent-cyan'
     },
     {
@@ -156,6 +165,18 @@ export default function Contact() {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="absolute -left-[9999px] h-0 overflow-hidden" aria-hidden="true">
+                    <label htmlFor="website">Website</label>
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={formData.website}
+                      onChange={handleInputChange}
+                    />
+                  </div>
                   <div>
                     <input
                       type="text"
@@ -201,7 +222,7 @@ export default function Contact() {
                       <p>{error}</p>
                       {error.includes('not configured') && (
                         <p className="mt-2 text-xs">
-                          See <code className="bg-red-100 px-1 rounded">NODEMAILER_SETUP.md</code> for setup instructions.
+                          Please email us directly at support@orbantistechnologies.com.
                         </p>
                       )}
                     </div>
@@ -383,8 +404,8 @@ export default function Contact() {
                     <Phone className="w-5 h-5 text-accent-cyan flex-shrink-0" />
                     <div>
                       <p className="text-gray-700 font-medium mb-1 font-poppins">Phone Number</p>
-                      <a href="tel:+919805871945" className="text-accent-blue hover:text-accent-cyan transition-colors text-lg font-semibold font-poppins">
-                        +91 9805871945
+                      <a href="tel:+918352841945" className="text-accent-blue hover:text-accent-cyan transition-colors text-lg font-semibold font-poppins">
+                        +91 8352841945
                       </a>
                     </div>
                   </div>

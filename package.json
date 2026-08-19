@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/copy-env.js",
+    "build": "node scripts/export-build.js",
     "build:copy-env": "next build && node scripts/copy-env.js",
     "start": "next start",
     "check:seo": "node scripts/check-seo.js",

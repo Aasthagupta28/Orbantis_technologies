@@ -12,10 +12,9 @@
 # Never commit archives (huge uploads / GitHub limits)
 *.zip
 .env
-# .env.local - Removed to allow pushing to Git
-.env.development.local
-.env.test.local
-.env.production.local
+.env.local
+.env*.local
+public/api/mail-config.php
 
 # logs
 npm-debug.log*
@@ -26,3 +25,4 @@ pnpm-debug.log*
 # editor
 .vscode/
 .idea/
+src/.api-dev-only/
