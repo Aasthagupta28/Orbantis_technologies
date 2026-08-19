@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import type SMTPTransport from 'nodemailer/lib/smtp-transport'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,6 +15,54 @@ function escapeHtml(value: string) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
+}
+
+function smtpConfig() {
+  const pass = (
+    process.env.SMTP_PASS ||
+    process.env.SMTP_PASSWORD ||
+    process.env.MAIL_PASS ||
+    ''
+  ).trim()
+
+  const port = Number(process.env.SMTP_PORT || 587)
+
+  return {
+    host: (process.env.SMTP_HOST || 'smtp.hostinger.com').trim(),
+    port,
+    user: (process.env.SMTP_USER || FROM_EMAIL).trim(),
+    pass,
+  }
+}
+
+function createTransport() {
+  const { host, port, user, pass } = smtpConfig()
+
+  const options: SMTPTransport.Options = {
+    host,
+    port,
+    secure: port === 465,
+    requireTLS: port !== 465,
+    auth: { user, pass },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
+  }
+
+  return nodemailer.createTransport({
+    ...options,
+    family: 4,
+  } as SMTPTransport.Options)
+}
+
+export async function GET() {
+  const { host, port, user, pass } = smtpConfig()
+  return NextResponse.json({
+    smtpHost: host,
+    smtpPort: port,
+    smtpUserSet: Boolean(user),
+    smtpPassSet: Boolean(pass),
+  })
 }
 
 export async function POST(request: Request) {
@@ -42,58 +91,61 @@ export async function POST(request: Request) {
       )
     }
 
-    const smtpUser = process.env.SMTP_USER || FROM_EMAIL
-    const smtpPass = process.env.SMTP_PASS || process.env.MAIL_PASS
-
-    if (!smtpPass) {
+    const { pass } = smtpConfig()
+    if (!pass) {
       return NextResponse.json(
         {
           ok: false,
-          error: 'Mail is not configured yet. Add SMTP_PASS in .env.local (support@ mailbox password).',
+          error:
+            'Mail is not configured on Vercel. Add SMTP_HOST, SMTP_PORT, SMTP_USER and SMTP_PASS, then Redeploy.',
         },
         { status: 500 }
       )
     }
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.hostinger.com',
-      port: Number(process.env.SMTP_PORT || 465),
-      secure: true,
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-    })
-
+    const transporter = createTransport()
     const safeName = escapeHtml(name)
     const safeEmail = escapeHtml(email)
     const safeMessage = escapeHtml(message).replace(/\n/g, '<br>')
 
-    await transporter.sendMail({
-      from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
-      to: TO_TEAM,
-      cc: CC,
-      replyTo: email,
-      subject: `New contact form message from ${name}`,
-      text: `New enquiry from the Orbantis website.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`,
-      html: `<p>New enquiry from the Orbantis website.</p><p><strong>Name:</strong> ${safeName}<br><strong>Email:</strong> ${safeEmail}</p><p><strong>Message:</strong><br>${safeMessage}</p>`,
-    })
-
-    await transporter.sendMail({
-      from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
-      to: email,
-      cc: CC,
-      subject: 'We received your message | Orbantis Technologies',
-      text: `Hi ${name},\n\nThank you for contacting Orbantis Technologies. We have received your message and will reply within 24 hours.\n\nYour message:\n${message}\n\n— Orbantis Technologies\n${FROM_EMAIL}\n`,
-      html: `<p>Hi ${safeName},</p><p>Thank you for contacting Orbantis Technologies. We have received your message and will reply within 24 hours.</p><p><strong>Your message:</strong><br>${safeMessage}</p><p>— Orbantis Technologies<br>${FROM_EMAIL}</p>`,
-    })
+    await Promise.all([
+      transporter.sendMail({
+        from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
+        to: TO_TEAM,
+        cc: CC,
+        replyTo: email,
+        subject: `New contact form message from ${name}`,
+        text: `New enquiry from the Orbantis website.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`,
+        html: `<p>New enquiry from the Orbantis website.</p><p><strong>Name:</strong> ${safeName}<br><strong>Email:</strong> ${safeEmail}</p><p><strong>Message:</strong><br>${safeMessage}</p>`,
+      }),
+      transporter.sendMail({
+        from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
+        to: email,
+        cc: CC,
+        subject: 'We received your message | Orbantis Technologies',
+        text: `Hi ${name},\n\nThank you for contacting Orbantis Technologies. We have received your message and will reply within 24 hours.\n\nYour message:\n${message}\n\n— Orbantis Technologies\n${FROM_EMAIL}\n`,
+        html: `<p>Hi ${safeName},</p><p>Thank you for contacting Orbantis Technologies. We have received your message and will reply within 24 hours.</p><p><strong>Your message:</strong><br>${safeMessage}</p><p>— Orbantis Technologies<br>${FROM_EMAIL}</p>`,
+      }),
+    ])
 
     return NextResponse.json({ ok: true })
   } catch (error) {
     console.error('Contact form mail failed:', error)
-    return NextResponse.json(
-      { ok: false, error: 'Could not send your message. Please try again or email us directly.' },
-      { status: 500 }
-    )
+    const messageText = error instanceof Error ? error.message : ''
+    const code =
+      error && typeof error === 'object' && 'code' in error
+        ? String((error as { code?: string }).code)
+        : ''
+
+    let friendly = 'Could not send your message. Please try again or email us directly.'
+    if (/invalid login|authentication|EAUTH/i.test(`${code} ${messageText}`)) {
+      friendly =
+        'Mail login failed. SMTP_USER must be support@orbantistechnologies.com and SMTP_PASS must be that mailbox password (no quotes).'
+    } else if (/timeout|connect|ENOTFOUND|ECONNECTION|ESOCKET|ETIMEDOUT/i.test(`${code} ${messageText}`)) {
+      friendly =
+        'Vercel could not reach the mail server. Set SMTP_HOST=smtp.hostinger.com and SMTP_PORT=587, then Redeploy. If Hostinger uses Titan, set SMTP_HOST=smtp.titan.email.'
+    }
+
+    return NextResponse.json({ ok: false, error: friendly }, { status: 500 })
   }
 }
