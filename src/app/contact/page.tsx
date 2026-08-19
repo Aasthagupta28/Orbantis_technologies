@@ -29,12 +29,7 @@ export default function Contact() {
     setError(null)
     
     try {
-      const isLocal =
-        window.location.hostname === 'localhost' ||
-        window.location.hostname === '127.0.0.1'
-      const endpoint = isLocal ? '/api/contact' : '/api/contact.php'
-
-      const response = await fetch(endpoint, {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

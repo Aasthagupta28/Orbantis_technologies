@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/api/contact.php", "destination": "/api/contact" }
+  ]
+}

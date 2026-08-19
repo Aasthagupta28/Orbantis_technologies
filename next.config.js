@@ -1,9 +1,12 @@
+const isVercel = process.env.VERCEL === '1'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  // Emits <route>/index.html so static hosts serve /about and /services with a 200
-  // instead of the 404/403 the flat <route>.html export produced.
+  // Hostinger static hosting needs `output: 'export'`.
+  // Vercel must keep the Next.js server so /api/contact works.
+  ...(!isVercel ? { output: 'export' } : {}),
   trailingSlash: true,
+  skipTrailingSlashRedirect: isVercel,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
