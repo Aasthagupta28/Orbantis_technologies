@@ -29,7 +29,14 @@ export default function Contact() {
     setError(null)
     
     try {
-      const response = await fetch('/api/contact', {
+      const host = window.location.hostname
+      const useNextApi =
+        host === 'localhost' ||
+        host === '127.0.0.1' ||
+        host.endsWith('.vercel.app')
+      const endpoint = useNextApi ? '/api/contact' : '/api/contact.php'
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,7 +55,7 @@ export default function Contact() {
       try {
         data = JSON.parse(text)
       } catch {
-        throw new Error('Could not send your message. Please try again.')
+        throw new Error('Contact form is not connected on this server. Please email support@orbantistechnologies.com.')
       }
 
       if (!response.ok || !data.ok) {

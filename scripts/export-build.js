@@ -35,12 +35,6 @@ try {
 
   run('npx', ['next', 'build'])
   run('node', ['scripts/copy-env.js'])
-
-  const hostingerApi = path.join(process.cwd(), 'hostinger', 'api')
-  const outApi = path.join(process.cwd(), 'out', 'api')
-  if (fs.existsSync(hostingerApi) && fs.existsSync(path.join(process.cwd(), 'out'))) {
-    fs.cpSync(hostingerApi, outApi, { recursive: true })
-  }
 } finally {
   if (moved && fs.existsSync(hiddenDir) && !fs.existsSync(apiDir)) {
     fs.renameSync(hiddenDir, apiDir)

@@ -14,7 +14,7 @@
 .env
 .env.local
 .env*.local
-hostinger/api/mail-config.php
+public/api/mail-config.php
 
 # logs
 npm-debug.log*

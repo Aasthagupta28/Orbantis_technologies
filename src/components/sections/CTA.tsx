@@ -78,14 +78,14 @@ const CTA = () => {
 
             {/* Email */}
             <a
-              href="mailto:arunkumarbhardwaj1999@gmail.com"
+              href="mailto:support@orbantistechnologies.com"
               className="group bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 hover:scale-105"
             >
               <div className="w-16 h-16 bg-aqua rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                 <Mail className="w-8 h-8 text-white" />
               </div>
               <h3 className="font-poppins font-semibold text-white mb-2">Email Us</h3>
-              <p className="text-gray-200 text-sm">arunkumarbhardwaj1999@gmail.com</p>
+              <p className="text-gray-200 text-sm">support@orbantistechnologies.com</p>
             </a>
 
             {/* Phone */}
@@ -97,7 +97,7 @@ const CTA = () => {
                 <Phone className="w-8 h-8 text-white" />
               </div>
               <h3 className="font-poppins font-semibold text-white mb-2">Call Us</h3>
-              <p className="text-gray-200 text-sm">8352841945</p>
+              <p className="text-gray-200 text-sm">+91 8352841945</p>
             </a>
           </motion.div>
 

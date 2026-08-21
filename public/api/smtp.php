@@ -25,8 +25,9 @@ function smtp_send(array $config, array $mail): void
 {
     $host = $config['smtp_host'];
     $port = (int) $config['smtp_port'];
+    $remote = $port === 465 ? "ssl://{$host}:{$port}" : "tcp://{$host}:{$port}";
     $socket = @stream_socket_client(
-        "ssl://{$host}:{$port}",
+        $remote,
         $errno,
         $errstr,
         20,
@@ -42,6 +43,14 @@ function smtp_send(array $config, array $mail): void
 
     $ehlo = preg_replace('/^www\./', '', $_SERVER['SERVER_NAME'] ?? 'orbantistechnologies.com');
     smtp_cmd($socket, 'EHLO ' . $ehlo, '250');
+    if ($port !== 465) {
+        smtp_cmd($socket, 'STARTTLS', '220');
+        $crypto = @stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+        if (!$crypto) {
+            throw new RuntimeException('STARTTLS failed');
+        }
+        smtp_cmd($socket, 'EHLO ' . $ehlo, '250');
+    }
     smtp_cmd($socket, 'AUTH LOGIN', '334');
     smtp_cmd($socket, base64_encode($config['smtp_user']), '334');
     smtp_cmd($socket, base64_encode($config['smtp_pass']), '235');

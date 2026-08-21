@@ -64,11 +64,11 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-gray-600">
                 <Mail className="w-4 h-4 text-accent-blue" />
-                <a href="mailto:arunkumarbhardwaj1999@gmail.com" className="text-sm hover:text-accent-blue transition-colors">arunkumarbhardwaj1999@gmail.com</a>
+                <a href="mailto:support@orbantistechnologies.com" className="text-sm hover:text-accent-blue transition-colors">support@orbantistechnologies.com</a>
               </div>
               <div className="flex items-center space-x-3 text-gray-600">
                 <Phone className="w-4 h-4 text-accent-cyan" />
-                <a href="tel:+918352841945" className="text-sm hover:text-accent-cyan transition-colors">8352841945</a>
+                <a href="tel:+918352841945" className="text-sm hover:text-accent-cyan transition-colors">+91 8352841945</a>
               </div>
               <div className="flex items-start space-x-3 text-gray-600">
                 <MapPin className="w-4 h-4 text-accent-magenta mt-1" />

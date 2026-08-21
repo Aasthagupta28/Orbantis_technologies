@@ -1,0 +1,4 @@
+public/api/contact.php
+public/api/smtp.php
+public/api/mail-config.example.php
+public/api/mail-config.php

@@ -16,8 +16,18 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$configPath = __DIR__ . '/mail-config.php';
-if (!is_file($configPath)) {
+$configCandidates = [
+    __DIR__ . '/mail-config.php',
+    dirname(__DIR__, 2) . '/mail-config.php',
+];
+$configPath = null;
+foreach ($configCandidates as $candidate) {
+    if (is_file($candidate)) {
+        $configPath = $candidate;
+        break;
+    }
+}
+if ($configPath === null) {
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'Mail is not configured on the server yet.']);
     exit;
