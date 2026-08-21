@@ -16,16 +16,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$configCandidates = [
-    __DIR__ . '/mail-config.php',
-    dirname(__DIR__, 2) . '/mail-config.php',
-];
 $configPath = null;
-foreach ($configCandidates as $candidate) {
+$dir = __DIR__;
+for ($i = 0; $i < 8; $i++) {
+    $candidate = $dir . '/mail-config.php';
     if (is_file($candidate)) {
         $configPath = $candidate;
         break;
     }
+    $parent = dirname($dir);
+    if ($parent === $dir) {
+        break;
+    }
+    $dir = $parent;
 }
 if ($configPath === null) {
     http_response_code(500);
